@@ -2,50 +2,164 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width">
-	<link rel="shortcut icon" href="img/favicon.png" type="image/png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coffee House</title>
+	<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+	<script>
+		document.documentElement.setAttribute(
+			"data-theme",
+			localStorage.getItem("coffee-house-theme") === "dark" ? "dark" : "light"
+		);
+	</script>
+	<link rel="stylesheet" href="../assets/css/style.css">
 	<link rel="stylesheet" href="css/style.css">
-	<title>Main</title>
 </head>
 <body>
 	<header class="header">
 		<div class="container">
-			<div class="header-nav">
-				<nav class="nav">
-				<a href="../Main/index.html" class="logo">
-					<img src="../Main/img/logo.svg" alt="logo-img">
+			<div class="header__inner">
+				<a href="index.html" class="logo" aria-label="Coffee House">
+					<img class="logo__img logo__img--light" src="../assets/img/logo.svg" alt="" width="100" height="60">
+					<img class="logo__img logo__img--dark" src="../assets/img/logo-dark.svg" alt="" width="100" height="60">
 				</a>
-					<ul class="nav-list">
-						<li class="nav-item-shelter">
-							<a href="#" class="nav-link">Favorite coffee</a></li>
-						<li class="nav-item">
-							<a href="" class="nav-link">About</a></li>
-						<li class="nav-item">
-							<a href="#Help" class="nav-link">Mobile app</a></li>
-						<li class="nav-item">
-							<a href="#footer" class="nav-link">Contact us</a></li>
+				<nav class="nav" aria-label="Main">
+					<ul class="nav__list">
+						<li>
+							<a href="#favorite-coffee" class="nav__link">Favorite coffee</a>
+						</li>
+						<li>
+							<a href="#about" class="nav__link">About</a>
+						</li>
+						<li>
+							<a href="#mobile-app" class="nav__link">Mobile app</a>
+						</li>
+						<li>
+							<a href="#footer" class="nav__link">Contact us</a>
+						</li>
 					</ul>
-					<div class="other-nav-items">
-						<button class="theme">
-							theme
-						</button>
-						<div class="menu">
-							<a href="../Menu/index.html" class="menu-link">Menu</a>
-						</div>
-					</div>
 				</nav>
-				<button class="nav-btn" id="nav-btn"><span></span></button>
+				<div class="header__actions">
+					<button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark theme">
+						<svg class="theme-toggle__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+							<path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+						</svg>
+						<span class="theme-toggle__thumb"></span>
+						<svg class="theme-toggle__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<path d="M13.2 10.2A5.2 5.2 0 0 1 5.8 2.8 5.3 5.3 0 1 0 13.2 10.2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<a href="../Menu/index.html" class="menu-link">
+						Menu
+						<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+							<path d="M14.166 9.767v1.9A5.833 5.833 0 1 1 2.5 11.667v-1.9c0-.332.268-.6.6-.6h10.466c.331 0 .6.268.6.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M10 7.5c0-.833.595-1.667 1.785-1.667A2.381 2.381 0 0 0 14.166 3.452V2.917" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M6.667 7.5v-.417A1.584 1.584 0 0 1 8.25 5.5c.92 0 1.667-.746 1.667-1.667V2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M13.334 9.167h2.083a2.083 2.083 0 1 1 0 4.166h-1.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+					<button class="burger" type="button" aria-label="Open menu">
+						<span></span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</header>
 	<main class="main">
-
+		<section class="preview_coffee">
+			<div class="container">
+				<div class="preview_coffee__banner">
+					<img class="preview_coffee__image" src="img/img-hero.jpg" alt="Barista pouring steamed milk into a cup of coffee">
+					<div class="preview_coffee__content">
+						<h1 class="preview_coffee__title">
+							Enjoy <span class="preview_coffee__accent">premium coffee</span>
+							<span class="preview_coffee__title-rest">at our charming cafe</span>
+						</h1>
+						<p class="preview_coffee__text">
+							With its inviting atmosphere and delicious coffee options, the Coffee House is a popular destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite beverage.
+						</p>
+						<a class="preview_coffee__btn" href="../Menu/index.html">
+							Menu
+							<svg class="preview_coffee__btn-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+								<path d="M14.166 9.767v1.9A5.833 5.833 0 1 1 2.5 11.667v-1.9c0-.332.268-.6.6-.6h10.466c.331 0 .6.268.6.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M10 7.5c0-.833.595-1.667 1.785-1.667A2.381 2.381 0 0 0 14.166 3.452V2.917" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M6.667 7.5v-.417A1.584 1.584 0 0 1 8.25 5.5c.92 0 1.667-.746 1.667-1.667V2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.334 9.167h2.083a2.083 2.083 0 1 1 0 4.166h-1.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section_coffee__slider" id="favorite-coffee">
+			<div class="container">
+				<h2 class="section_coffee__slider-title">
+					Choose your <span>favorite</span> coffee
+				</h2>
+				<div class="slider" data-slider>
+					<div class="slider__stage">
+					<button class="slider__btn slider__btn--prev" type="button" aria-label="Previous slide">
+						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<div class="slider__viewport">
+						<ul class="slider__track">
+							<li class="slider__slide">
+								<article class="slide">
+									<img class="slide__image" src="img/coffee-slider/coffee-slider-1.png" alt="S'mores Frappuccino" width="480" height="480">
+									<h3 class="slide__title">S’mores Frappuccino</h3>
+									<p class="slide__text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+									<p class="slide__price">$5.50</p>
+								</article>
+							</li>
+							<li class="slider__slide">
+								<article class="slide">
+									<img class="slide__image" src="img/coffee-slider/coffee-slider-2.png" alt="Caramel Macchiato" width="480" height="480">
+									<h3 class="slide__title">Caramel Macchiato</h3>
+									<p class="slide__text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
+									<p class="slide__price">$5.00</p>
+								</article>
+							</li>
+							<li class="slider__slide">
+								<article class="slide">
+									<img class="slide__image" src="img/coffee-slider/coffee-slider-3.png" alt="Ice coffee" width="480" height="480">
+									<h3 class="slide__title">Ice coffee</h3>
+									<p class="slide__text">A popular summer drink that tones and invigorates. Prepared from coffee, milk and ice.</p>
+									<p class="slide__price">$4.50</p>
+								</article>
+							</li>
+						</ul>
+					</div>
+					<button class="slider__btn slider__btn--next" type="button" aria-label="Next slide">
+						<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					</div>
+					<div class="slider__bars">
+						<button class="slider__bar is-active" type="button" data-slide="0" aria-label="Go to slide 1">
+							<span class="slider__bar-fill"></span>
+						</button>
+						<button class="slider__bar" type="button" data-slide="1" aria-label="Go to slide 2">
+							<span class="slider__bar-fill"></span>
+						</button>
+						<button class="slider__bar" type="button" data-slide="2" aria-label="Go to slide 3">
+							<span class="slider__bar-fill"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>
 	</main>
 	<footer id="footer" class="footer">
 		<div class="container">
 		</div>
 	</footer>
+	<script src="../assets/js/theme.js"></script>
 	<script src="js/index.js"></script>
 </body>
 </html>

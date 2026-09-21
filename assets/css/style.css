@@ -94,7 +94,10 @@ button {
 }
 
 .header {
+  position: relative;
+  z-index: 40;
   padding: 20px 0;
+  background-color: var(--color-bg);
 }
 
 .header__inner {
@@ -132,11 +135,15 @@ button {
 }
 
 .nav {
+  display: flex;
   flex-grow: 1;
+  align-items: center;
+  min-width: 0;
 }
 
 .nav__list {
   display: flex;
+  flex-grow: 1;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -255,7 +262,7 @@ button {
   border-radius: 100px;
   background-color: currentColor;
   transform: translateX(-50%);
-  transition: background-color var(--transition);
+  transition: top var(--transition), bottom var(--transition), transform var(--transition), background-color var(--transition);
 }
 
 .burger::before {
@@ -454,13 +461,84 @@ a.footer__contact:hover::after {
     --container-padding: 20px;
   }
 
-  .nav,
-  .menu-link {
-    display: none;
-  }
-
   .burger {
     display: block;
+  }
+
+  .logo,
+  .header__actions {
+    position: relative;
+    z-index: 40;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 140px 20px 40px;
+    background-color: var(--color-bg);
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  .nav__list {
+    flex-grow: 0;
+    flex-direction: column;
+    row-gap: 60px;
+  }
+
+  .nav__link {
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .menu-link {
+    margin-top: 100px;
+    font-size: 32px;
+    line-height: 1.25;
+    column-gap: 16px;
+  }
+
+  .menu-link svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  body.is-menu-open {
+    overflow: hidden;
+  }
+
+  body.is-menu-open .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  body.is-menu-open .nav {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  body.is-menu-open .burger::before {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  body.is-menu-open .burger::after {
+    top: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 }
 

@@ -1,16 +1,16 @@
 (function () {
-  let AUTO_DELAY = 6000;
+  var AUTO_DELAY = 6000;
 
   function initSlider(root) {
-    let track = root.querySelector(".slider__track");
-    let slides = root.querySelectorAll(".slider__slide");
-    let prev = root.querySelector(".slider__btn--prev");
-    let next = root.querySelector(".slider__btn--next");
-    let bars = root.querySelectorAll(".slider__bar");
-    let total = slides.length;
-    let index = 0;
-    let timer = null;
-    let startX = 0;
+    var track = root.querySelector(".slider__track");
+    var slides = root.querySelectorAll(".slider__slide");
+    var prev = root.querySelector(".slider__btn--prev");
+    var next = root.querySelector(".slider__btn--next");
+    var bars = root.querySelectorAll(".slider__bar");
+    var total = slides.length;
+    var index = 0;
+    var timer = null;
+    var startX = 0;
 
     if (!track || total < 2) {
       return;
@@ -71,7 +71,7 @@
     }, { passive: true });
 
     track.addEventListener("touchend", function (event) {
-      let dx = event.changedTouches[0].clientX - startX;
+      var dx = event.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 40) {
         goTo(index + (dx < 0 ? 1 : -1));
       } else {

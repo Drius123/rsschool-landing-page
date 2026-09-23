@@ -1,7 +1,7 @@
 (function () {
-  var MOBILE_QUERY = "(max-width: 768px)";
-  var MOBILE_LIMIT = 4;
-  var OPTIONS = {
+  let MOBILE_QUERY = "(max-width: 768px)";
+  let MOBILE_LIMIT = 4;
+  let OPTIONS = {
     coffee: {
       sizes: [
         { mark: "S", label: "200 ml", extra: 0 },
@@ -40,20 +40,20 @@
     }
   };
 
-  var tabs = document.querySelectorAll(".menu__tab");
-  var cards = document.querySelectorAll(".menu__card");
-  var moreButton = document.querySelector(".menu__more");
-  var panel = document.querySelector("#menu-panel");
-  var dialog = document.querySelector(".modal");
-  var modalImage = dialog.querySelector(".modal__img");
-  var modalTitle = dialog.querySelector(".modal__title");
-  var modalText = dialog.querySelector(".modal__text");
-  var sizeOptions = dialog.querySelector("[data-size-options]");
-  var additiveOptions = dialog.querySelector("[data-additive-options]");
-  var totalEl = dialog.querySelector("[data-modal-total]");
-  var category = "coffee";
-  var expanded = false;
-  var basePrice = 0;
+  let tabs = document.querySelectorAll(".menu__tab");
+  let cards = document.querySelectorAll(".menu__card");
+  let moreButton = document.querySelector(".menu__more");
+  let panel = document.querySelector("#menu-panel");
+  let dialog = document.querySelector(".modal");
+  let modalImage = dialog.querySelector(".modal__img");
+  let modalTitle = dialog.querySelector(".modal__title");
+  let modalText = dialog.querySelector(".modal__text");
+  let sizeOptions = dialog.querySelector("[data-size-options]");
+  let additiveOptions = dialog.querySelector("[data-additive-options]");
+  let totalEl = dialog.querySelector("[data-modal-total]");
+  let category = "coffee";
+  let expanded = false;
+  let basePrice = 0;
 
   function isMobile() {
     return window.matchMedia(MOBILE_QUERY).matches;
@@ -66,12 +66,12 @@
   }
 
   function render() {
-    var current = cardsInCategory(category);
-    var limit = !isMobile() || expanded ? current.length : MOBILE_LIMIT;
+    let current = cardsInCategory(category);
+    let limit = !isMobile() || expanded ? current.length : MOBILE_LIMIT;
 
     cards.forEach(function (card) {
-      var match = card.getAttribute("data-category") === category;
-      var index = current.indexOf(card);
+      let match = card.getAttribute("data-category") === category;
+      let index = current.indexOf(card);
       card.hidden = !match || index >= limit;
     });
 
@@ -87,9 +87,9 @@
   }
 
   function updateTotal() {
-    var sizeInput = dialog.querySelector('input[name="modal-size"]:checked');
-    var sizeExtra = sizeInput ? parseFloat(sizeInput.value) : 0;
-    var additiveExtra = 0;
+    let sizeInput = dialog.querySelector('input[name="modal-size"]:checked');
+    let sizeExtra = sizeInput ? parseFloat(sizeInput.value) : 0;
+    let additiveExtra = 0;
 
     dialog.querySelectorAll('input[name="modal-additive"]:checked').forEach(function (input) {
       additiveExtra += parseFloat(input.value);
@@ -99,10 +99,10 @@
   }
 
   function createOption(type, name, mark, label, extra, checked) {
-    var option = document.createElement("label");
-    var input = document.createElement("input");
-    var badge = document.createElement("span");
-    var text = document.createElement("span");
+    let option = document.createElement("label");
+    let input = document.createElement("input");
+    let badge = document.createElement("span");
+    let text = document.createElement("span");
 
     option.className = "modal__option";
     input.className = "visually-hidden";
@@ -119,7 +119,7 @@
   }
 
   function fillOptions(card) {
-    var data = OPTIONS[card.getAttribute("data-category")];
+    let data = OPTIONS[card.getAttribute("data-category")];
 
     sizeOptions.replaceChildren();
     additiveOptions.replaceChildren();
@@ -134,7 +134,7 @@
   }
 
   function lockScroll() {
-    var gap = window.innerWidth - document.documentElement.clientWidth;
+    let gap = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = gap + "px";
   }
@@ -145,7 +145,7 @@
   }
 
   function openModal(card) {
-    var image = card.querySelector("img");
+    let image = card.querySelector("img");
 
     modalImage.src = image.src;
     modalImage.alt = image.alt;
@@ -161,7 +161,7 @@
 
   tabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
-      var next = tab.getAttribute("data-category");
+      let next = tab.getAttribute("data-category");
       if (next === category) {
         return;
       }
@@ -170,7 +170,7 @@
       expanded = false;
 
       tabs.forEach(function (item) {
-        var active = item === tab;
+        let active = item === tab;
         item.classList.toggle("is-active", active);
         item.setAttribute("aria-selected", active ? "true" : "false");
       });

@@ -43,6 +43,7 @@
   var tabs = document.querySelectorAll(".menu__tab");
   var cards = document.querySelectorAll(".menu__card");
   var moreButton = document.querySelector(".menu__more");
+  var panel = document.querySelector("#menu-panel");
   var dialog = document.querySelector(".modal");
   var modalImage = dialog.querySelector(".modal__img");
   var modalTitle = dialog.querySelector(".modal__title");
@@ -173,6 +174,8 @@
         item.classList.toggle("is-active", active);
         item.setAttribute("aria-selected", active ? "true" : "false");
       });
+
+      panel.setAttribute("aria-labelledby", tab.id);
 
       render();
     });

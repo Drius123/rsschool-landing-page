@@ -73,7 +73,7 @@
 			<div class="container">
 				<h1 id="menu-title" class="menu__title">Behind each of our cups hides an <span>amazing surprise</span></h1>
 				<div class="menu__tabs" role="tablist" aria-label="Product categories">
-					<button class="menu__tab is-active" type="button" role="tab" aria-selected="true" data-category="coffee">
+					<button class="menu__tab is-active" type="button" role="tab" id="tab-coffee" aria-controls="menu-panel" aria-selected="true" data-category="coffee">
 						<span class="menu__tab-icon" aria-hidden="true">
 							<svg viewBox="0 0 20 20" fill="none">
 								<path d="M14.166 9.767v1.9A5.833 5.833 0 1 1 2.5 11.667v-1.9c0-.332.268-.6.6-.6h10.466c.331 0 .6.268.6.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -84,7 +84,7 @@
 						</span>
 						Coffee
 					</button>
-					<button class="menu__tab" type="button" role="tab" aria-selected="false" data-category="tea">
+					<button class="menu__tab" type="button" role="tab" id="tab-tea" aria-controls="menu-panel" aria-selected="false" data-category="tea">
 						<span class="menu__tab-icon" aria-hidden="true">
 							<svg viewBox="0 0 24 24" fill="none">
 								<path d="M10.29 3h3.42a2 2 0 0 1 1.988 1.78l1.555 14a2 2 0 0 1-1.988 2.22h-6.53a2 2 0 0 1-1.988-2.22l1.555-14A2 2 0 0 1 10.29 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -94,7 +94,7 @@
 						</span>
 						Tea
 					</button>
-					<button class="menu__tab" type="button" role="tab" aria-selected="false" data-category="dessert">
+					<button class="menu__tab" type="button" role="tab" id="tab-dessert" aria-controls="menu-panel" aria-selected="false" data-category="dessert">
 						<span class="menu__tab-icon" aria-hidden="true">
 							<svg viewBox="0 0 24 24" fill="none">
 								<path d="M3 20h18v-8a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -105,6 +105,7 @@
 						Dessert
 					</button>
 				</div>
+				<div class="menu__panel" role="tabpanel" id="menu-panel" aria-labelledby="tab-coffee">
 				<ul class="menu__list">
 					<li class="menu__card" data-category="coffee">
 						<article>
@@ -347,6 +348,7 @@
 						</article>
 					</li>
 				</ul>
+				</div>
 				<button class="menu__more" type="button" hidden aria-label="Show more products">
 					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path d="M20 12a8 8 0 1 1-2.2-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>

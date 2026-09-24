@@ -246,9 +246,22 @@
   background-color: var(--color-border);
 }
 
+@keyframes fill-bar {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
 .slider__bar.is-active .slider__bar-fill {
-  width: 100%;
-  transition: width 6s linear;
+  animation: fill-bar 6s linear forwards;
+}
+
+.slider__bar.is-paused .slider__bar-fill {
+  animation-play-state: paused;
 }
 
 @media (hover: none) {
@@ -259,9 +272,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slider__track,
-  .slider__bar.is-active .slider__bar-fill {
+  .slider__track {
     transition: none;
+  }
+
+  .slider__bar.is-active .slider__bar-fill {
+    animation: none;
+    width: 100%;
   }
 }
 

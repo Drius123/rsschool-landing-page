@@ -11,14 +11,22 @@
     let index = 0;
     let timer = null;
     let startX = 0;
+    let remaining = AUTO_DELAY;
+    let startedAt = 0;
+    let paused = false;
 
     if (!track || total < 2) {
       return;
     }
 
+    function clearTimer() {
+      window.clearTimeout(timer);
+      timer = null;
+    }
+
     function restartBar(activeIndex) {
       bars.forEach(function (bar) {
-        bar.classList.remove("is-active");
+        bar.classList.remove("is-active", "is-paused");
       });
       void root.offsetWidth;
       if (bars[activeIndex]) {
@@ -26,22 +34,51 @@
       }
     }
 
+    function scheduleNext(delay) {
+      clearTimer();
+      remaining = delay;
+      startedAt = Date.now();
+      paused = false;
+      timer = window.setTimeout(function () {
+        goTo(index + 1);
+      }, delay);
+    }
+
+    function startAutoplay() {
+      scheduleNext(AUTO_DELAY);
+    }
+
+    function pauseAutoplay() {
+      if (paused) {
+        return;
+      }
+
+      paused = true;
+      remaining = Math.max(0, remaining - (Date.now() - startedAt));
+      clearTimer();
+
+      if (bars[index]) {
+        bars[index].classList.add("is-paused");
+      }
+    }
+
+    function resumeAutoplay() {
+      if (!paused) {
+        return;
+      }
+
+      if (bars[index]) {
+        bars[index].classList.remove("is-paused");
+      }
+
+      scheduleNext(remaining > 0 ? remaining : AUTO_DELAY);
+    }
+
     function goTo(nextIndex) {
       index = (nextIndex + total) % total;
       track.style.transform = "translateX(-" + index * 100 + "%)";
       restartBar(index);
       startAutoplay();
-    }
-
-    function startAutoplay() {
-      window.clearInterval(timer);
-      timer = window.setInterval(function () {
-        goTo(index + 1);
-      }, AUTO_DELAY);
-    }
-
-    function stopAutoplay() {
-      window.clearInterval(timer);
     }
 
     if (prev) {
@@ -62,12 +99,12 @@
       });
     });
 
-    root.addEventListener("mouseenter", stopAutoplay);
-    root.addEventListener("mouseleave", startAutoplay);
+    root.addEventListener("mouseenter", pauseAutoplay);
+    root.addEventListener("mouseleave", resumeAutoplay);
 
     track.addEventListener("touchstart", function (event) {
       startX = event.changedTouches[0].clientX;
-      stopAutoplay();
+      pauseAutoplay();
     }, { passive: true });
 
     track.addEventListener("touchend", function (event) {
@@ -75,15 +112,15 @@
       if (Math.abs(dx) > 40) {
         goTo(index + (dx < 0 ? 1 : -1));
       } else {
-        startAutoplay();
+        resumeAutoplay();
       }
     });
 
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) {
-        stopAutoplay();
+        pauseAutoplay();
       } else {
-        startAutoplay();
+        resumeAutoplay();
       }
     });
 

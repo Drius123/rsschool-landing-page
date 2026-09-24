@@ -1,47 +1,15 @@
 (function () {
   let MOBILE_QUERY = "(max-width: 768px)";
   let MOBILE_LIMIT = 4;
-  let OPTIONS = {
-    coffee: {
-      sizes: [
-        { mark: "S", label: "200 ml", extra: 0 },
-        { mark: "M", label: "300 ml", extra: 0.5 },
-        { mark: "L", label: "400 ml", extra: 1 }
-      ],
-      additives: [
-        { name: "Sugar", extra: 0.5 },
-        { name: "Cinnamon", extra: 0.5 },
-        { name: "Syrup", extra: 0.5 }
-      ]
-    },
-    tea: {
-      sizes: [
-        { mark: "S", label: "200 ml", extra: 0 },
-        { mark: "M", label: "300 ml", extra: 0.5 },
-        { mark: "L", label: "400 ml", extra: 1 }
-      ],
-      additives: [
-        { name: "Sugar", extra: 0.5 },
-        { name: "Lemon", extra: 0.5 },
-        { name: "Syrup", extra: 0.5 }
-      ]
-    },
-    dessert: {
-      sizes: [
-        { mark: "S", label: "50 g", extra: 0 },
-        { mark: "M", label: "100 g", extra: 0.5 },
-        { mark: "L", label: "200 g", extra: 1 }
-      ],
-      additives: [
-        { name: "Berries", extra: 0.5 },
-        { name: "Nuts", extra: 0.5 },
-        { name: "Jam", extra: 0.5 }
-      ]
-    }
+  let PRODUCTS_URL = "../assets/js/products.json";
+  let IMAGE_PATH = {
+    coffee: { folder: "img/coffee", prefix: "coffee", ext: "jpg" },
+    tea: { folder: "img/tea", prefix: "tea", ext: "png" },
+    dessert: { folder: "img/desert", prefix: "dessert", ext: "png" }
   };
 
   let tabs = document.querySelectorAll(".menu__tab");
-  let cards = document.querySelectorAll(".menu__card");
+  let list = document.querySelector(".menu__list");
   let moreButton = document.querySelector(".menu__more");
   let panel = document.querySelector("#menu-panel");
   let dialog = document.querySelector(".modal");
@@ -51,6 +19,7 @@
   let sizeOptions = dialog.querySelector("[data-size-options]");
   let additiveOptions = dialog.querySelector("[data-additive-options]");
   let totalEl = dialog.querySelector("[data-modal-total]");
+  let cards = [];
   let category = "coffee";
   let expanded = false;
   let basePrice = 0;
@@ -60,7 +29,7 @@
   }
 
   function cardsInCategory(name) {
-    return Array.prototype.filter.call(cards, function (card) {
+    return cards.filter(function (card) {
       return card.getAttribute("data-category") === name;
     });
   }
@@ -82,8 +51,61 @@
     return "$" + value.toFixed(2);
   }
 
-  function parsePrice(text) {
-    return parseFloat(text.replace("$", "")) || 0;
+  function imageSrc(product, indexInCategory) {
+    let path = IMAGE_PATH[product.category];
+    return path.folder + "/" + path.prefix + "-" + (indexInCategory + 1) + "." + path.ext;
+  }
+
+  function createCard(product, indexInCategory) {
+    let card = document.createElement("li");
+    let article = document.createElement("article");
+    let media = document.createElement("div");
+    let image = document.createElement("img");
+    let body = document.createElement("div");
+    let title = document.createElement("h2");
+    let text = document.createElement("p");
+    let price = document.createElement("p");
+
+    card.className = "menu__card";
+    card.setAttribute("data-category", product.category);
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.product = product;
+
+    media.className = "menu__card-media";
+    image.src = imageSrc(product, indexInCategory);
+    image.alt = product.name;
+    image.width = 310;
+    image.height = 310;
+
+    body.className = "menu__card-body";
+    title.className = "menu__card-title";
+    title.textContent = product.name;
+    text.className = "menu__card-text";
+    text.textContent = product.description;
+    price.className = "menu__card-price";
+    price.textContent = formatPrice(parseFloat(product.price));
+
+    media.append(image);
+    body.append(title, text, price);
+    article.append(media, body);
+    card.append(article);
+
+    card.addEventListener("click", function () {
+      if (card.hidden) {
+        return;
+      }
+      openModal(card);
+    });
+
+    card.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        card.click();
+      }
+    });
+
+    return card;
   }
 
   function updateTotal() {
@@ -118,18 +140,33 @@
     return option;
   }
 
-  function fillOptions(card) {
-    let data = OPTIONS[card.getAttribute("data-category")];
+  function fillOptions(product) {
+    let sizeKeys = ["s", "m", "l"];
 
     sizeOptions.replaceChildren();
     additiveOptions.replaceChildren();
 
-    data.sizes.forEach(function (size, index) {
-      sizeOptions.append(createOption("radio", "modal-size", size.mark, size.label, size.extra, index === 0));
+    sizeKeys.forEach(function (key, index) {
+      let size = product.sizes[key];
+      sizeOptions.append(createOption(
+        "radio",
+        "modal-size",
+        key.toUpperCase(),
+        size.size,
+        parseFloat(size["add-price"]),
+        index === 0
+      ));
     });
 
-    data.additives.forEach(function (additive, index) {
-      additiveOptions.append(createOption("checkbox", "modal-additive", String(index + 1), additive.name, additive.extra, false));
+    product.additives.forEach(function (additive, index) {
+      additiveOptions.append(createOption(
+        "checkbox",
+        "modal-additive",
+        String(index + 1),
+        additive.name,
+        parseFloat(additive["add-price"]),
+        false
+      ));
     });
   }
 
@@ -145,81 +182,83 @@
   }
 
   function openModal(card) {
+    let product = card.product;
     let image = card.querySelector("img");
 
     modalImage.src = image.src;
     modalImage.alt = image.alt;
-    modalTitle.textContent = card.querySelector(".menu__card-title").textContent;
-    modalText.textContent = card.querySelector(".menu__card-text").textContent;
-    basePrice = parsePrice(card.querySelector(".menu__card-price").textContent);
+    modalTitle.textContent = product.name;
+    modalText.textContent = product.description;
+    basePrice = parseFloat(product.price);
 
-    fillOptions(card);
+    fillOptions(product);
     updateTotal();
     dialog.showModal();
     lockScroll();
   }
 
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      let next = tab.getAttribute("data-category");
-      if (next === category) {
-        return;
-      }
+  function bindTabs() {
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        let next = tab.getAttribute("data-category");
+        if (next === category) {
+          return;
+        }
 
-      category = next;
-      expanded = false;
+        category = next;
+        expanded = false;
 
-      tabs.forEach(function (item) {
-        let active = item === tab;
-        item.classList.toggle("is-active", active);
-        item.setAttribute("aria-selected", active ? "true" : "false");
+        tabs.forEach(function (item) {
+          let active = item === tab;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        panel.setAttribute("aria-labelledby", tab.id);
+        render();
       });
+    });
+  }
 
-      panel.setAttribute("aria-labelledby", tab.id);
+  function init(products) {
+    let counters = { coffee: 0, tea: 0, dessert: 0 };
 
+    products.forEach(function (product) {
+      let index = counters[product.category];
+      counters[product.category] += 1;
+      cards.push(createCard(product, index));
+    });
+
+    list.append.apply(list, cards);
+    bindTabs();
+
+    moreButton.addEventListener("click", function () {
+      expanded = true;
       render();
     });
-  });
 
-  moreButton.addEventListener("click", function () {
-    expanded = true;
-    render();
-  });
-
-  cards.forEach(function (card) {
-    card.setAttribute("tabindex", "0");
-    card.setAttribute("role", "button");
-
-    card.addEventListener("click", function () {
-      if (card.hidden) {
-        return;
-      }
-      openModal(card);
-    });
-
-    card.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        card.click();
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) {
+        dialog.close();
       }
     });
-  });
 
-  dialog.addEventListener("click", function (event) {
-    if (event.target === dialog) {
-      dialog.close();
-    }
-  });
+    dialog.addEventListener("close", unlockScroll);
+    dialog.addEventListener("change", updateTotal);
 
-  dialog.addEventListener("close", unlockScroll);
-  dialog.addEventListener("change", updateTotal);
+    window.addEventListener("resize", function () {
+      if (!isMobile()) {
+        expanded = false;
+      }
+      render();
+    });
 
-  window.addEventListener("resize", function () {
-    if (!isMobile()) {
-      expanded = false;
-    }
     render();
-  });
+  }
 
-  render();
+  fetch(PRODUCTS_URL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(init);
 })();

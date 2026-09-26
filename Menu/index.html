@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu | Coffee House</title>
+	<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+	<script>
+		document.documentElement.setAttribute(
+			"data-theme",
+			localStorage.getItem("coffee-house-theme") === "dark" ? "dark" : "light"
+		);
+	</script>
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="header__inner">
+				<a href="../Main/index.html" class="logo" aria-label="Coffee House">
+					<img class="logo__img logo__img--light" src="../assets/img/logo.svg" alt="" width="100" height="60">
+					<img class="logo__img logo__img--dark" src="../assets/img/logo-dark.svg" alt="" width="100" height="60">
+				</a>
+				<nav class="nav" id="site-nav" aria-label="Main">
+					<ul class="nav__list">
+						<li>
+							<a href="../Main/index.html#favorite-coffee" class="nav__link">Favorite coffee</a>
+						</li>
+						<li>
+							<a href="../Main/index.html#about" class="nav__link">About</a>
+						</li>
+						<li>
+							<a href="../Main/index.html#mobile-app" class="nav__link">Mobile app</a>
+						</li>
+						<li>
+							<a href="#footer" class="nav__link">Contact us</a>
+						</li>
+					</ul>
+					<a href="index.html" class="menu-link is-active" aria-current="page">
+						Menu
+						<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+							<path d="M14.166 9.767v1.9A5.833 5.833 0 1 1 2.5 11.667v-1.9c0-.332.268-.6.6-.6h10.466c.331 0 .6.268.6.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M10 7.5c0-.833.595-1.667 1.785-1.667A2.381 2.381 0 0 0 14.166 3.452V2.917" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M6.667 7.5v-.417A1.584 1.584 0 0 1 8.25 5.5c.92 0 1.667-.746 1.667-1.667V2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M13.334 9.167h2.083a2.083 2.083 0 1 1 0 4.166h-1.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</nav>
+				<div class="header__actions">
+					<button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark theme">
+						<svg class="theme-toggle__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+							<path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+						</svg>
+						<span class="theme-toggle__thumb"></span>
+						<svg class="theme-toggle__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<path d="M13.2 10.2A5.2 5.2 0 0 1 5.8 2.8 5.3 5.3 0 1 0 13.2 10.2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+						<span></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main class="main">
+		<section class="menu" aria-labelledby="menu-title">
+			<div class="container">
+				<h1 id="menu-title" class="menu__title">Behind each of our cups hides an <span>amazing surprise</span></h1>
+				<div class="menu__tabs" role="tablist" aria-label="Product categories">
+					<button class="menu__tab is-active" type="button" role="tab" id="tab-coffee" aria-controls="menu-panel" aria-selected="true" data-category="coffee">
+						<span class="menu__tab-icon" aria-hidden="true">
+							<svg viewBox="0 0 20 20" fill="none">
+								<path d="M14.166 9.767v1.9A5.833 5.833 0 1 1 2.5 11.667v-1.9c0-.332.268-.6.6-.6h10.466c.331 0 .6.268.6.6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M10 7.5c0-.833.595-1.667 1.785-1.667A2.381 2.381 0 0 0 14.166 3.452V2.917" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M6.667 7.5v-.417A1.584 1.584 0 0 1 8.25 5.5c.92 0 1.667-.746 1.667-1.667V2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.334 9.167h2.083a2.083 2.083 0 1 1 0 4.166h-1.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						Coffee
+					</button>
+					<button class="menu__tab" type="button" role="tab" id="tab-tea" aria-controls="menu-panel" aria-selected="false" data-category="tea">
+						<span class="menu__tab-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M10.29 3h3.42a2 2 0 0 1 1.988 1.78l1.555 14a2 2 0 0 1-1.988 2.22h-6.53a2 2 0 0 1-1.988-2.22l1.555-14A2 2 0 0 1 10.29 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M7.47 12.5 3.213 7.481A.9.9 0 0 1 3.903 6h13.09A3 3 0 0 1 20 9v3c0 1.657-1.346 3-3.007 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M7 17h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						Tea
+					</button>
+					<button class="menu__tab" type="button" role="tab" id="tab-dessert" aria-controls="menu-panel" aria-selected="false" data-category="dessert">
+						<span class="menu__tab-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M3 20h18v-8a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M3 14.803c.312.135.654.204 1 .197a2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1c.35.007.692-.062 1-.197" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="m12 4 1.465 1.638a2 2 0 1 1-3.015.099L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						Dessert
+					</button>
+				</div>
+				<div class="menu__panel" role="tabpanel" id="menu-panel" aria-labelledby="tab-coffee">
+				<ul class="menu__list"></ul>
+				</div>
+				<button class="menu__more" type="button" hidden aria-label="Show more products">
+					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path d="M20 12a8 8 0 1 1-2.2-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+						<path d="M20 4v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+			</div>
+		</section>
+	</main>
+	<footer id="footer" class="footer">
+		<div class="container">
+			<div class="footer__inner">
+				<div class="footer__socials">
+					<h2 class="footer__title">Sip, Savor, Smile. <span>It’s coffee time!</span></h2>
+					<p class="footer__subtitle">Join us on social networks</p>
+					<ul class="footer__networks">
+						<li>
+							<a class="footer__network" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+								<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path d="M19.5 7.2c.6-.4 1.1-1 1.4-1.6-.6.3-1.2.5-1.9.6A3.2 3.2 0 0 0 16.6 5c-1.8 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.8-2.7-.1-5.1-1.5-6.7-3.6-.3.5-.4 1-.4 1.6 0 1.1.5 2.1 1.4 2.7-.5 0-1-.2-1.5-.4v.1c0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.2 3 2.2A6.4 6.4 0 0 0 4.5 17 9 9 0 0 0 9.4 18.4c5.8 0 9-4.9 9-9.2v-.4Z" fill="currentColor"/>
+								</svg>
+							</a>
+						</li>
+						<li>
+							<a class="footer__network" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+								<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.5"/>
+									<circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.5"/>
+									<circle cx="16.6" cy="7.4" r="0.9" fill="currentColor"/>
+								</svg>
+							</a>
+						</li>
+						<li>
+							<a class="footer__network" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+								<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path d="M14 8.5h2.5V5.8H14c-2.1 0-3.5 1.5-3.5 3.6V12H8.2v2.7h2.3V20h2.8v-5.3h2.5l.5-2.7h-3V9.6c0-.7.3-1.1 1.2-1.1Z" fill="currentColor"/>
+								</svg>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer__contacts">
+					<h3 class="footer__contacts-title">Contact us</h3>
+					<ul class="footer__contacts-list">
+						<li>
+							<a class="footer__contact" href="https://www.google.com/maps/search/?api=1&amp;query=8558+Green+Rd+Los+Angeles" target="_blank" rel="noopener noreferrer">
+								<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+									<path d="M10 17s6-4.4 6-9a6 6 0 1 0-12 0c0 4.6 6 9 6 9Z" stroke="currentColor" stroke-width="1.5"/>
+									<circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
+								</svg>
+								<span>8558 Green Rd., LA</span>
+							</a>
+						</li>
+						<li>
+							<a class="footer__contact" href="tel:+16035550123">
+								<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+									<path d="M5.6 4.4c.3-.8 1.2-1.2 2-.9l1.6.6c.7.3 1 1.1.8 1.8l-.5 1.6c-.1.5.1 1 .5 1.3l2.2 1.7c.4.3 1 .4 1.4.1l1.5-.7c.7-.3 1.6 0 1.9.7l.7 1.6c.4.8.1 1.8-.7 2.2-1.4.7-3.3.8-5.4-.5-2.2-1.4-4.1-3.7-5-6.4-.4-1.2-.4-2.4.1-3.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+								</svg>
+								<span>+1 (603) 555-0123</span>
+							</a>
+						</li>
+						<li>
+							<p class="footer__contact">
+								<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+									<circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+									<path d="M10 6.5V10l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<span>Mon-Sat: 9:00 AM – 23:00 PM</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<dialog class="modal" aria-labelledby="modal-title">
+		<div class="modal__content">
+			<div class="modal__media">
+				<img class="modal__img" src="" alt="" width="310" height="310">
+			</div>
+			<form class="modal__form" action="#" method="dialog">
+				<h2 class="modal__title" id="modal-title"></h2>
+				<p class="modal__text"></p>
+				<fieldset class="modal__fieldset">
+					<legend class="modal__legend">Size</legend>
+					<div class="modal__options" data-size-options></div>
+				</fieldset>
+				<fieldset class="modal__fieldset">
+					<legend class="modal__legend">Additives</legend>
+					<div class="modal__options" data-additive-options></div>
+				</fieldset>
+				<p class="modal__total">
+					<span>Total:</span>
+					<span data-modal-total></span>
+				</p>
+				<p class="modal__note">
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5"/>
+						<path d="M8 7.2V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+						<circle cx="8" cy="5.2" r="0.8" fill="currentColor"/>
+					</svg>
+					The cost is not final. Need to write something about it? Need to calculate the cost of the selected options of the checkout page. Until then, you can add or remove some food items.
+				</p>
+				<button class="modal__close" type="submit">Close</button>
+			</form>
+		</div>
+	</dialog>
+	<script src="../assets/js/theme.js"></script>
+	<script src="../assets/js/burger.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>
